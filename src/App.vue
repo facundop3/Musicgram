@@ -5,7 +5,7 @@ html
       img(src="./assets/logo.png")
       h1 Musicgram
       h2 Choose you country:
-      input(type="text" )
+      //- input(type="text" )
       ul
         artist(v-for="artist in artists" :artist="artist" :key="artist.mbid")
 
