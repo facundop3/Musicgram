@@ -1,33 +1,53 @@
 <template lang="pug">
 html
   body
-    #app
+    #app(class="container-fluid")
       img(src="./assets/logo.png")
       h1 Musicgram
-      h2 Choose you country:
-      //- input(type="text" )
+      h2 Type you country and let us search most listened:
+        input(type="text" class="form-control col-2 country-input" placeholder="Uruguay" v-model="selectedCountry" @keyup.enter="getTopArtist(selectedCountry)")
+        loadingComponent(v-show="loading")
       ul
-        artist(v-for="artist in artists" :artist="artist" :key="artist.mbid")
+        artist(v-for="artist in artists" :artist="artist" :key="artist.mbid" class="col-2")
 
 </template>
 
 <script>
 import getTopArtist from './api'
 import artist from './components/artist.vue'
+import loadingComponent from './components/loading.vue'
+
 
 export default {
   name: 'app',
   data () {
     return {
-      artists: []
+      artists: [],
+      selectedCountry: 'Uruguay',
+      loading: true,
     }
   },
   components:{
-    artist
+    artist,
+    loadingComponent
   },
   mounted: function(){
-    getTopArtist()
-        .then((artists)=> this.artists = artists)
+    this.getArtist();
+  },
+  methods:{
+  getArtist : function() {
+  this.loading= true;
+  this.artists=[];
+    getTopArtist(this.selectedCountry)
+        .then((artists)=> {
+          this.artists = artists;
+          this.loading = false; })
+    }
+  },
+  watch: {
+    selectedCountry: function (){
+      this.getArtist()
+    }
   }
 }
 </script>
@@ -54,4 +74,7 @@ li
 
 a
     color #42b983
+.country-input{
+  display: inline-block;
+}
 </style>
