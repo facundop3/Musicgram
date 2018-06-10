@@ -4,8 +4,8 @@ html
     #app(class="container-fluid")
       img(src="dist/logo.png")
       h1 Musicgram
-      h2 Type you country and let us search most listened:
-        input(type="text" class="form-control col-2 country-input" placeholder="Uruguay" v-model="selectedCountry" @keyup.enter="getTopArtist(selectedCountry)")
+      h2 Type you country and let us search most listened:  
+        input(type="text" class="form-control country-input" placeholder="Uruguay" v-model="selectedCountry" @keyup.enter="getTopArtist(selectedCountry)")
         loadingComponent(v-show="loading")
       ul
         artist(v-for="artist in artists" :artist="artist" :key="artist.mbid" class="col-2")
@@ -76,5 +76,6 @@ a
     color #42b983
 .country-input{
   display: inline-block;
+  width: auto;
 }
 </style>
