@@ -2,7 +2,7 @@
 html
   body
     #app(class="container-fluid")
-      img(src="https://facundop3.github.io/musicgram/dist/logo.png")
+      img(src="dist/logo.png")
       h1 Musicgram
       h2 Type you country and let us search most listened:
         input(type="text" class="form-control col-2 country-input" placeholder="Uruguay" v-model="selectedCountry" @keyup.enter="getTopArtist(selectedCountry)")
